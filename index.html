@@ -1,41 +1,390 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jaypee Industrial Corporation</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Jaypee Industrial Corporation — Geosynthetics & Waterproofing</title>
+  <meta name="description" content="Jaypee Industrial Corporation — Suppliers of HDPE Geocell, Geotextile, Geobags, Waterproofing solutions." />
   <style>
-    body { margin:0; font-family: Arial, sans-serif; }
-    header { background: #fff; padding: 20px; text-align: center; }
-    header img { height: 60px; }
-    .slider { position: relative; overflow: hidden; max-width: 100%; height: 80vh; }
-    .slides { display: flex; width: 400%; animation: slide 12s infinite; }
-    .slides img { width: 100%; height: 80vh; object-fit: cover; }
-    @keyframes slide {
-      0% { transform: translateX(0%); }
-      20% { transform: translateX(0%); }
-      25% { transform: translateX(-100%); }
-      45% { transform: translateX(-100%); }
-      50% { transform: translateX(-200%); }
-      70% { transform: translateX(-200%); }
-      75% { transform: translateX(-300%); }
-      95% { transform: translateX(-300%); }
-      100% { transform: translateX(0%); }
+    /* SOLMAX-style + hero slider + animations (English only) */
+    :root{
+      --jaypee-blue:#004a86;
+      --jaypee-blue-2:#0073b8;
+      --muted:#6b7280;
+      --bg:#f6f8fb;
+      --card:#ffffff;
+      --glass: rgba(255,255,255,0.72);
+      --radius:12px;
+      --max-w:1300px;
+      --shadow: 0 12px 40px rgba(6,20,40,0.08);
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:#0b1220}
+    a{color:var(--jaypee-blue-2)}
+
+    /* Header */
+    header{position:fixed;top:0;left:0;right:0;z-index:120}
+    .header-inner{max-width:var(--max-w);margin:0 auto;padding:18px 24px;display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;gap:14px;align-items:center}
+    .logo{width:60px;height:60px;border-radius:10px;background:linear-gradient(135deg,var(--jaypee-blue),var(--jaypee-blue-2));display:grid;place-items:center;color:#fff;font-weight:800;font-size:22px}
+    .nav{display:flex;gap:18px;align-items:center}
+    .nav a{color:#fff;padding:8px 10px;border-radius:8px;text-decoration:none}
+    .nav .cta{background:#fff;color:var(--jaypee-blue);font-weight:700;padding:8px 12px;border-radius:8px}
+
+    /* HERO SLIDER */
+    .hero-slider{position:relative;height:100vh;min-height:520px;overflow:hidden}
+    .slides{height:100%;width:100%;display:block;position:relative}
+    .slide{position:absolute;inset:0;display:flex;align-items:center;background-size:cover;background-position:center;transition:opacity 900ms ease,transform 900ms ease;opacity:0;transform:scale(1.02)}
+    .slide.active{opacity:1;transform:scale(1)}
+    .slide::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,0.46), rgba(0,0,0,0.26));}
+
+    .hero-inner{position:relative;z-index:2;max-width:var(--max-w);margin:0 auto;padding:48px;display:grid;grid-template-columns:1fr 440px;gap:28px;color:#fff}
+    .kicker{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+    .hero h1{font-size:44px;line-height:1.02;margin:8px 0 12px;font-weight:800}
+    .hero p.lead{max-width:60ch;color:rgba(255,255,255,0.95);margin:0 0 18px}
+    .actions{display:flex;gap:12px}
+    .btn-white{background:white;color:var(--jaypee-blue);padding:12px 16px;border-radius:10px;font-weight:700}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.14);color:#fff;padding:12px 16px;border-radius:10px}
+
+    /* slider controls */
+    .slider-controls{position:absolute;left:20px;bottom:22px;display:flex;gap:8px;z-index:40}
+    .dot{width:12px;height:12px;border-radius:999px;background:rgba(255,255,255,0.5);cursor:pointer}
+    .dot.active{background:white}
+    .arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.35);border-radius:999px;width:44px;height:44px;display:grid;place-items:center;color:white;border:0;cursor:pointer}
+    .arrow.left{left:18px}
+    .arrow.right{right:18px}
+
+    /* enquiry card */
+    .enquiry{background:var(--glass);padding:18px;border-radius:12px;color:#fff}
+    .enquiry label{display:block;font-size:13px;margin-top:10px}
+    .enquiry input{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.12);background:transparent;color:#fff}
+
+    main{max-width:var(--max-w);margin:28px auto;padding:0 24px}
+
+    /* industry carousel like SOLMAX (simple scrollable strip) */
+    .industry-strip{margin-top:-40px;background:transparent;padding:12px 0}
+    .industry-list{display:flex;gap:12px;overflow:auto;padding:12px;border-radius:10px}
+    .industry{min-width:200px;background:#fff;padding:18px;border-radius:10px;box-shadow:var(--shadow);display:flex;gap:12px;align-items:center}
+    .industry img{width:64px;height:64px;object-fit:cover;border-radius:8px}
+
+    /* feature product */
+    .feature{display:grid;grid-template-columns:1fr 420px;gap:22px;align-items:center;margin-top:18px}
+    .feature .text h2{margin:0 0 8px}
+    .feature .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:var(--shadow)}
+
+    /* projects */
+    .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:18px}
+    .project{background:#fff;border-radius:10px;overflow:hidden;box-shadow:var(--shadow)}
+    .project img{width:100%;height:180px;object-fit:cover}
+
+    /* resources */
+    .resources{display:flex;gap:14px;flex-wrap:wrap;margin-top:18px}
+    .resource{flex:1 1 240px;background:#fff;padding:16px;border-radius:10px;box-shadow:var(--shadow)}
+
+    /* footer */
+    footer{margin-top:28px;background:#f2f6fb;padding:36px 0}
+    .footer-inner{max-width:var(--max-w);margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;gap:12px}
+
+    /* scroll animations */
+    .reveal{opacity:0;transform:translateY(14px);transition:opacity 600ms ease,transform 600ms ease}
+    .reveal.visible{opacity:1;transform:none}
+
+    /* responsive */
+    @media (max-width:1100px){
+      .hero-inner{grid-template-columns:1fr}
+      .feature{grid-template-columns:1fr}
+    }
+    @media (max-width:720px){
+      .nav{display:none}
+      .hero{height:520px}
+      .hero h1{font-size:28px}
+      main{padding:0 14px}
+    }
+
+    /* utilities */
+    .muted{color:var(--muted)}
   </style>
 </head>
 <body>
   <header>
-    <img src="images/logo.png" alt="Jaypee Logo">
-    <h1>Jaypee Industrial Corporation</h1>
-  </header>
-  <div class="slider">
-    <div class="slides">
-      <img src="images/product1.jpg" alt="Product 1">
-      <img src="images/product2.jpg" alt="Product 2">
-      <img src="images/product3.jpg" alt="Product 3">
-      <img src="images/product4.jpg" alt="Product 4">
+    <div class="header-inner">
+      <div class="brand">
+        <div class="logo">J</div>
+        <div>
+          <div style="font-weight:700">Jaypee Industrial Corporation</div>
+          <div style="font-size:13px;color:var(--muted)">Geosynthetics • Waterproofing • Industrial Solutions</div>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Main navigation">
+        <a href="#">Company</a>
+        <a href="#products">Products</a>
+        <a href="#projects">Projects</a>
+        <a href="#resources">Resources</a>
+        <a href="#contact" class="cta">Contact</a>
+      </nav>
     </div>
-  </div>
+  </header>
+
+  <!-- HERO SLIDER -->
+  <section class="hero-slider" aria-label="Hero slider">
+    <div class="slides" id="slides">
+      <div class="slide active" style="background-image:url('assets/slide1.jpg')">
+        <div class="hero-inner" aria-hidden="false">
+          <div>
+            <div class="kicker">Industrial geosynthetics</div>
+            <h1>Engineering resilient infrastructure with Jaypee solutions</h1>
+            <p class="lead">HDPE geocell, geotextiles, geobags and waterproofing systems — engineered for durability and delivered nationwide.</p>
+            <div class="actions"><a class="btn-white" href="#contact">Get a Quote</a><a class="btn-ghost" href="#products">Explore Products</a></div>
+
+            <div class="industry-strip reveal">
+              <div class="industry-list">
+                <div class="industry"><img src="assets/industry-transport.jpg" alt="Transport"/><div><strong>Transportation</strong><div class="muted">Roads & bridges</div></div></div>
+                <div class="industry"><img src="assets/industry-waste.jpg" alt="Waste"/><div><strong>Waste</strong><div class="muted">Containment & lining</div></div></div>
+                <div class="industry"><img src="assets/industry-water.jpg" alt="Water"/><div><strong>Water</strong><div class="muted">Reservoirs & canals</div></div></div>
+                <div class="industry"><img src="assets/industry-mining.jpg" alt="Mining"/><div><strong>Mining</strong><div class="muted">Heap leach & tailings</div></div></div>
+                <div class="industry"><img src="assets/industry-aqua.jpg" alt="Aquaculture"/><div><strong>Aquaculture</strong><div class="muted">Fish farms</div></div></div>
+              </div>
+            </div>
+          </div>
+
+          <aside class="enquiry reveal" role="form" aria-labelledby="quick-enquiry">
+            <div id="quick-enquiry" style="font-weight:700">Quick Enquiry</div>
+            <div class="muted" style="margin-top:6px">Tell us about your project</div>
+            <label for="qname">Name</label>
+            <input id="qname" placeholder="Your name" />
+            <label for="qcontact">Contact</label>
+            <input id="qcontact" placeholder="Phone or email" />
+            <div style="margin-top:12px;display:flex;gap:8px">
+              <button class="btn-white" onclick="submitQuick()">Send</button>
+              <button class="btn-ghost" onclick="document.getElementById('qname').value='';document.getElementById('qcontact').value=''">Clear</button>
+            </div>
+            <div id="qmsg" style="margin-top:10px;display:none;color:#fff"></div>
+          </aside>
+        </div>
+      </div>
+
+      <div class="slide" style="background-image:url('assets/slide2.jpg')">
+        <div class="hero-inner">
+          <div>
+            <div class="kicker">Coastal & Marine</div>
+            <h1>Coastal protection & geobag solutions</h1>
+            <p class="lead">Durable coastal defenses engineered with high performance geosynthetics and proven installation methods.</p>
+            <div class="actions"><a class="btn-white" href="#projects">View Projects</a><a class="btn-ghost" href="#resources">Learn More</a></div>
+          </div>
+
+          <aside class="enquiry reveal">
+            <div style="font-weight:700">Quick Enquiry</div>
+            <div class="muted" style="margin-top:6px">Tell us about your project</div>
+            <label for="qname2">Name</label>
+            <input id="qname2" placeholder="Your name" />
+            <label for="qcontact2">Contact</label>
+            <input id="qcontact2" placeholder="Phone or email" />
+            <div style="margin-top:12px;display:flex;gap:8px">
+              <button class="btn-white" onclick="submitQuickAlt('qname2','qcontact2')">Send</button>
+              <button class="btn-ghost" onclick="document.getElementById('qname2').value='';document.getElementById('qcontact2').value=''">Clear</button>
+            </div>
+            <div id="qmsg2" style="margin-top:10px;display:none;color:#fff"></div>
+          </aside>
+        </div>
+      </div>
+
+      <div class="slide" style="background-image:url('assets/slide3.jpg')">
+        <div class="hero-inner">
+          <div>
+            <div class="kicker">Waterproofing Systems</div>
+            <h1>Comprehensive waterproofing for foundations & structures</h1>
+            <p class="lead">Membranes, coatings and waterstops designed for long-term performance and ease of installation.</p>
+            <div class="actions"><a class="btn-white" href="#products">Products</a><a class="btn-ghost" href="#contact">Get Support</a></div>
+          </div>
+
+          <aside class="enquiry reveal">
+            <div style="font-weight:700">Quick Enquiry</div>
+            <div class="muted" style="margin-top:6px">Tell us about your project</div>
+            <label for="qname3">Name</label>
+            <input id="qname3" placeholder="Your name" />
+            <label for="qcontact3">Contact</label>
+            <input id="qcontact3" placeholder="Phone or email" />
+            <div style="margin-top:12px;display:flex;gap:8px">
+              <button class="btn-white" onclick="submitQuickAlt('qname3','qcontact3')">Send</button>
+              <button class="btn-ghost" onclick="document.getElementById('qname3').value='';document.getElementById('qcontact3').value=''">Clear</button>
+            </div>
+            <div id="qmsg3" style="margin-top:10px;display:none;color:#fff"></div>
+          </aside>
+        </div>
+      </div>
+
+      <div class="slide" style="background-image:url('assets/slide4.jpg')">
+        <div class="hero-inner">
+          <div>
+            <div class="kicker">GEOCELL</div>
+            <h1>Geocell solutions for slope protection & stabilization</h1>
+            <p class="lead">Engineered HDPE geocells for slope protection, erosion control and load distribution.</p>
+            <div class="actions"><a class="btn-white" href="#products">View Details</a><a class="btn-ghost" href="#contact">Request Quote</a></div>
+          </div>
+
+          <aside class="enquiry reveal">
+            <div style="font-weight:700">Quick Enquiry</div>
+            <div class="muted" style="margin-top:6px">Tell us about your project</div>
+            <label for="qname4">Name</label>
+            <input id="qname4" placeholder="Your name" />
+            <label for="qcontact4">Contact</label>
+            <input id="qcontact4" placeholder="Phone or email" />
+            <div style="margin-top:12px;display:flex;gap:8px">
+              <button class="btn-white" onclick="submitQuickAlt('qname4','qcontact4')">Send</button>
+              <button class="btn-ghost" onclick="document.getElementById('qname4').value='';document.getElementById('qcontact4').value=''">Clear</button>
+            </div>
+            <div id="qmsg4" style="margin-top:10px;display:none;color:#fff"></div>
+          </aside>
+        </div>
+      </div>
+
+    </div>
+
+    <button class="arrow left" aria-label="Previous slide">‹</button>
+    <button class="arrow right" aria-label="Next slide">›</button>
+    <div class="slider-controls" id="dots"></div>
+  </section>
+
+  <main>
+    <div style="max-width:var(--max-w);margin:0 auto;padding:0 24px">
+
+      <!-- Featured product area like Solmax GEOTUBE section -->
+      <section class="feature reveal" aria-labelledby="feature-title">
+        <div class="text">
+          <div class="kicker">Featured Solution</div>
+          <h2 id="feature-title">GEOCELL® — cellular confinement for steep slopes & load support</h2>
+          <p class="muted">High-strength HDPE geocell systems for slope protection, erosion control and subgrade reinforcement. Engineered to reduce maintenance and extend pavement life.</p>
+          <div style="margin-top:12px"><a href="#products">View product details</a> • <a href="#resources">Download datasheet</a></div>
+        </div>
+        <div class="card" style="display:flex;flex-direction:column;gap:12px;align-items:center;justify-content:center">
+          <img src="assets/feature-geocell.jpg" alt="Geocell" style="width:100%;height:auto;border-radius:8px;object-fit:cover"/>
+          <div style="font-weight:700">GEOCELL</div>
+          <div class="muted">Durable HDPE cells, UV stabilised, available in custom heights and panel sizes.</div>
+        </div>
+      </section>
+
+      <!-- Projects grid -->
+      <section class="reveal" aria-labelledby="projects-title">
+        <h3 id="projects-title" style="margin-top:28px">Selected Projects</h3>
+        <div class="projects">
+          <div class="project"><img src="assets/project1.jpg" alt="Coastal"/><div class="pmeta" style="padding:12px"><strong>Coastal Protection — Andhra Pradesh</strong><div class="muted">Geobags and revetment works.</div></div></div>
+          <div class="project"><img src="assets/project2.jpg" alt="Landfill"/><div class="pmeta" style="padding:12px"><strong>Landfill Containment — Gujarat</strong><div class="muted">Geotextile & HDPE liner supply.</div></div></div>
+          <div class="project"><img src="assets/project3.jpg" alt="Road"/><div class="pmeta" style="padding:12px"><strong>Road Stabilization — Rajasthan</strong><div class="muted">Geocell for subgrade reinforcement.</div></div></div>
+        </div>
+      </section>
+
+      <!-- Resources -->
+      <section class="reveal" id="resources" style="margin-top:20px">
+        <h3>Resources</h3>
+        <div class="resources">
+          <div class="resource"><strong>Datasheets</strong><div class="muted">Download technical PDFs for materials.</div></div>
+          <div class="resource"><strong>Case Studies</strong><div class="muted">Project performance and outcomes.</div></div>
+          <div class="resource"><strong>Installation Guides</strong><div class="muted">Step by step installation & QA checks.</div></div>
+        </div>
+      </section>
+
+      <!-- Contact form -->
+      <section id="contact" class="reveal" style="margin-top:26px;display:grid;grid-template-columns:1fr 360px;gap:18px;align-items:start">
+        <div>
+          <h3>Contact Us</h3>
+          <p class="muted">Request a quote or ask for technical support.</p>
+          <form id="contactForm">
+            <label for="name">Full name</label>
+            <input id="name" placeholder="Your full name" required />
+            <label for="company">Company / Project</label>
+            <input id="company" placeholder="Company or project name" />
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="you@example.com" required />
+            <label for="message">Message</label>
+            <textarea id="message" placeholder="Tell us about your requirement"></textarea>
+            <div style="margin-top:8px;display:flex;gap:8px"><button class="btn-white" type="button" onclick="submitContact()">Send</button><button class="btn-ghost" type="button" onclick="document.getElementById('contactForm').reset()">Clear</button></div>
+            <div id="cmsg" style="display:none;margin-top:8px;color:green"></div>
+          </form>
+        </div>
+
+        <aside>
+          <div style="background:#fff;padding:12px;border-radius:10px;box-shadow:var(--shadow)">
+            <h4 style="margin:0">Head Office</h4>
+            <div class="muted" style="margin-top:8px">Noida, Uttar Pradesh, India</div>
+            <div class="muted" style="margin-top:8px">Phone: +91-XXXXXXXXXX</div>
+            <div class="muted">Email: info@jaypeeindustrial.com</div>
+            <div style="margin-top:12px"><a href="#">View on Google Maps</a></div>
+          </div>
+
+          <div style="margin-top:12px;background:#fff;padding:12px;border-radius:10px;box-shadow:var(--shadow)">
+            <h4 style="margin:0">Brochure</h4>
+            <div class="muted" style="margin-top:8px">Company brochure & product catalogue (demo).</div>
+            <div style="margin-top:10px"><a class="btn-white" href="#">Download PDF</a></div>
+          </div>
+        </aside>
+      </section>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div style="font-weight:700">Jaypee Industrial Corporation</div>
+        <div class="muted">© 2025 — All rights reserved</div>
+      </div>
+      <div class="muted">Designed for performance • info@jaypeeindustrial.com</div>
+    </div>
+  </footer>
+
+  <script>
+    // HERO SLIDER + animations + simple handlers
+    (function(){
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      const dotsWrap = document.getElementById('dots');
+      const left = document.querySelector('.arrow.left');
+      const right = document.querySelector('.arrow.right');
+      let idx = 0; let timer = null; const delay = 5000;
+
+      function makeDots(){
+        slides.forEach((s,i)=>{
+          const d = document.createElement('div'); d.className='dot'+(i===0?' active':''); d.dataset.i=i; d.addEventListener('click', ()=>goTo(i)); dotsWrap.appendChild(d);
+        });
+      }
+      function setActive(n){
+        slides.forEach((s,i)=> s.classList.toggle('active', i===n));
+        Array.from(dotsWrap.children).forEach((d,i)=> d.classList.toggle('active', i===n));
+        idx = n;
+      }
+      function goTo(n){ clearTimeout(timer); setActive((n+slides.length)%slides.length); timer = setTimeout(next, delay); }
+      function next(){ goTo(idx+1); }
+      function prev(){ goTo(idx-1); }
+
+      makeDots();
+      timer = setTimeout(next, delay);
+      left.addEventListener('click', prev); right.addEventListener('click', next);
+
+      // pause on hover
+      document.querySelector('.hero-slider').addEventListener('mouseenter', ()=>{ clearTimeout(timer); });
+      document.querySelector('.hero-slider').addEventListener('mouseleave', ()=>{ timer = setTimeout(next, delay); });
+
+      // scroll reveal using IntersectionObserver
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(en=>{
+          if(en.isIntersecting) en.target.classList.add('visible');
+        });
+      }, {threshold:0.12});
+      document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
+
+      // header color change on scroll
+      const header = document.querySelector('header');
+      const navLinks = document.querySelectorAll('.nav a');
+      function onScroll(){ const y = window.scrollY || window.pageYOffset; if(y > 48){ header.style.background = '#fff'; header.style.boxShadow = '0 8px 20px rgba(6,20,40,0.06)'; navLinks.forEach(a=>a.style.color='var(--jaypee-blue)'); } else { header.style.background = 'transparent'; header.style.boxShadow = 'none'; navLinks.forEach(a=>a.style.color='#fff'); } }
+      window.addEventListener('scroll', onScroll); onScroll();
+
+      // simple form handlers
+      window.submitQuick = function(){ const name = document.getElementById('qname').value.trim(); const contact = document.getElementById('qcontact').value.trim(); const el = document.getElementById('qmsg'); if(!name || !contact){ el.style.display='block'; el.style.color='#ffd2d2'; el.textContent='Please enter name and contact.'; setTimeout(()=>el.style.display='none',2500); return; } el.style.display='block'; el.style.color='#d4ffd9'; el.textContent='Message sent (demo)'; setTimeout(()=>{el.style.display='none'; document.getElementById('qname').value=''; document.getElementById('qcontact').value='';},1200); };
+      window.submitQuickAlt = function(nid,cid){ const name = document.getElementById(nid).value.trim(); const contact = document.getElementById(cid).value.trim(); const el = document.getElementById('qmsg'); if(!name || !contact){ el.style.display='block'; el.style.color='#ffd2d2'; el.textContent='Please enter name and contact.'; setTimeout(()=>el.style.display='none',2500); return; } el.style.display='block'; el.style.color='#d4ffd9'; el.textContent='Message sent (demo)'; setTimeout(()=>{el.style.display='none'; document.getElementById(nid).value=''; document.getElementById(cid).value='';},1200); };
+      window.submitContact = function(){ const email = document.getElementById('email').value.trim(); const name = document.getElementById('name').value.trim(); const el = document.getElementById('cmsg'); if(!name || !email){ el.style.display='block'; el.style.color='crimson'; el.textContent='Please enter name and a valid email.'; setTimeout(()=>el.style.display='none',3000); return; } el.style.display='block'; el.style.color='green'; el.textContent='Message sent (demo)'; setTimeout(()=>{el.style.display='none'; document.getElementById('contactForm').reset();},1500); };
+
+    })();
+  </script>
 </body>
 </html>
